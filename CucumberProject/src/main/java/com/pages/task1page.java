@@ -241,7 +241,7 @@ public class task1page {
 		resuable.selectdropvalue(calmonth, "Jun");
 		resuable.selectdropvalue(calyear, "2019");
 		resuable.selectDate(calDate,"4");
-		resuable.WaitforElement(cal2, 20);
+		//resuable.WaitforElement(cal2, 20);
 		cal2.click();
 		resuable.selectdropvalue(calmonth1, "Jun");
 		resuable.selectdropvalue(calyear1, "2021");
