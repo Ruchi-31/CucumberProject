@@ -21,11 +21,13 @@ import com.qa.util.reusable;
 
 
 
+
 public class task1page {
 
 	//public WebDriver driver;
 	reusable resuable;
 	public WebDriver driver;
+
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 	
 	public task1page(WebDriver rdriver){
@@ -199,6 +201,10 @@ public class task1page {
 	@CacheLookup
 	WebElement NoRecord;
 	
+	@FindBy(xpath ="//*[@id='divFormContainer']/div[2]")
+	@CacheLookup
+	WebElement sccessfultext;
+	
 	
 	
 	public void enterUserName() {
@@ -230,13 +236,12 @@ public class task1page {
 		EmpName.sendKeys("Rebecca Harmony");  
 		EmpName.sendKeys(Keys.ENTER);
 		resuable.selectdropvalue(selectJobtitle, "QA Engineer");
-		resuable.selectdropvalue(selectJobstatus, "Activated");
+		resuable.selectdropvalue(selectJobstatus, "All");
 		cal1.click();
 		resuable.selectdropvalue(calmonth, "Jun");
 		resuable.selectdropvalue(calyear, "2019");
 		resuable.selectDate(calDate,"4");
-		WebDriverWait wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.visibilityOf(cal2));
+		resuable.WaitforElement(cal2, 20);
 		cal2.click();
 		resuable.selectdropvalue(calmonth1, "Jun");
 		resuable.selectdropvalue(calyear1, "2021");
@@ -252,26 +257,46 @@ public class task1page {
 	public void rating() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", ScrollEle);
+        rating1.clear();
         rating1.sendKeys("3");
+        comment1.clear();
         comment1.sendKeys("Ok");
+        rating2.clear();
         rating2.sendKeys("4");
+        comment2.clear();
         comment2.sendKeys("Good");
+        rating3.clear();
         rating3.sendKeys("5");
+        comment3.clear();
         comment3.sendKeys("Very Good");
+        rating4.clear();
         rating4.sendKeys("3");
+        comment4.clear();
         comment4.sendKeys("Ok");
+        rating5.clear();
         rating5.sendKeys("4");
+        comment5.clear();
         comment5.sendKeys("Good");
+        Generalrating.clear();
         Generalrating.sendKeys("Good");
         js.executeScript("arguments[0].scrollIntoView();", ScrollFinal);
+        Finalrating.clear();
         Finalrating.sendKeys("4");
+        FinalComment.clear();
         FinalComment.sendKeys("Good");
         cal.click();
 		resuable.selectdropvalue(calmonth3, "Jun");
 		resuable.selectdropvalue(calyear3, "2021");
 		resuable.selectDate(calDate2,"8");
 		Savebtn.click();
-		js.executeScript("arguments[0].scrollIntoView();", Savebtn);
+		String sccess = sccessfultext.getText();
+		if(sccess.contains("Successfully Saved"))
+		{
+			System.out.println("Comment save Successfully");
+		}else{
+			System.out.println("Error");
+		}
+		
 	}
 
 }
